@@ -1,31 +1,13 @@
-body {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
 .container {
-    height: 500px;
-    width: 500px;
-    background-color: tan;
     display: flex;
-    flex-direction: column;
-    gap: 5px;
-    border-radius: 20px;
-    padding: 5px 5px;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: beige;
 }
 
-.book {
-    background-color: black;
-    border-radius: 15px;
-    color: white;
-    gap: 5px;
-    padding: 5px 5px 5px 5px;
-    text-align: center;
-}
-
-button {
-    background-color: red;
+.box {
+    height: 100px;
+    width: 100px;
+    background-color: greenyellow;
 }
