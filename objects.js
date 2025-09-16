@@ -21,8 +21,17 @@ function Book(title, author, pages, read){
     this.pages = pages;
     this.read = read;
     this.id = crypto.randomUUID();
-    this.info = () => console.log(`Title of the book is ${title} author is ${author}, there are ${pages} pages, and it has been read? ${read}`);
 }
+
+Book.prototype.toggleRead = function() {
+    this.read = !this.read;
+}
+
+Book.prototype.info = function() {
+    console.log(`Title of the book is ${this.title} author is ${this.author}, there are ${this.pages} pages, and it has been read? ${this.read}`);
+}
+
+
 
 function addBookToLibrary(title, author, pages, read) {
     const newBook = new Book(title, author, pages, read);
@@ -47,6 +56,7 @@ player2.sayName();
 const libraryDiv = document.querySelector(".container");
 
 function displayBooks(array) {
+    libraryDiv.querySelectorAll('.box').forEach(el => el.remove());
     array.forEach(element => {
         element.info();
         const card = document.createElement("div");
@@ -64,10 +74,30 @@ function displayBooks(array) {
         const read = document.createElement("p");
         read.textContent = element.read ? "Already read" : "Not read yet";
 
+        const toggleReadBtn = document.createElement("button");
+        toggleReadBtn.textContent = "Toggle Read Status";
+
+        toggleReadBtn.addEventListener("click", () => {
+            element.toggleRead()
+            displayBooks(myLibrary);
+        })
+
+        const removeBook = document.createElement("button");
+        removeBook.textContent = "Remove";
+        removeBook.addEventListener("click", () => {
+            const idx = myLibrary.findIndex(el => el.id === element.id);
+                if(idx > -1) {
+                    myLibrary.splice(idx, 1);
+                    displayBooks(myLibrary);
+                }
+        });
+
         card.appendChild(title);
         card.appendChild(author);
         card.appendChild(pages);
         card.appendChild(read);
+        card.appendChild(toggleReadBtn);
+        card.appendChild(removeBook);
 
         libraryDiv.appendChild(card);
     }
@@ -77,21 +107,42 @@ function displayBooks(array) {
 const btn = document.createElement("button");
 btn.classList.add("btn");
 btn.textContent = 'Add a new book'
+btn.addEventListener("click", () => {
+    modal.showModal();
+});
+
 libraryDiv.appendChild(btn);
+
 const form = document.querySelector(".formContainer");
 const modal = document.querySelector('.modal');
 
+const submitModal = document.createElement("button");
+form.appendChild(submitModal);
+submitModal.textContent = "Submit";
+
 const closeModal = document.createElement("button");
+form.appendChild(closeModal);
 closeModal.textContent = "Close"
-modal.appendChild(closeModal);
+
 
 closeModal.addEventListener("click", () => {
     modal.close();
 });
 
-btn.addEventListener("click", () => {
-    modal.showModal();
+submitModal.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const title = document.querySelector("#title").value;
+    const author = document.querySelector("#author").value;
+    const pages = Number(document.querySelector("#pages").value);
+    const read = document.querySelector("#read").checked;
+    const newBook = new Book(title, author, pages, read);
+    myLibrary.push(newBook);
+
+    displayBooks(myLibrary);    
+    modal.close();
 });
+
 
 displayBooks(myLibrary);
 
