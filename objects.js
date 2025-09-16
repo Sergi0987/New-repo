@@ -74,40 +74,23 @@ function displayBooks(array) {
 );
 }
 
-const openBtn = document.getElementById("openFormBtn");
-const closeBtn = document.getElementById("closeFormBtn");
-const modal = document.getElementById("formModal");
+const btn = document.createElement("button");
+btn.classList.add("btn");
+btn.textContent = 'Add a new book'
+libraryDiv.appendChild(btn);
+const form = document.querySelector(".formContainer");
+const modal = document.querySelector('.modal');
 
-openBtn.addEventListener("click", () => {
-  modal.classList.remove("hidden");
+const closeModal = document.createElement("button");
+closeModal.textContent = "Close"
+modal.appendChild(closeModal);
+
+closeModal.addEventListener("click", () => {
+    modal.close();
 });
 
-closeBtn.addEventListener("click", () => {
-  modal.classList.add("hidden");
-});
-
-// (optional) close if you click outside the form
-modal.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    modal.classList.add("hidden");
-  }
-});
-
-// form handling (as before)
-const form = document.getElementById("bookForm");
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const title = form.title.value;
-  const author = form.author.value;
-  const pages = form.pages.value;
-  const read = form.read.checked;
-
-  addBookToLibrary(title, author, pages, read);
-  displayBooks(myLibrary);
-
-  form.reset();
-  modal.classList.add("hidden"); // close after submit
+btn.addEventListener("click", () => {
+    modal.showModal();
 });
 
 displayBooks(myLibrary);

@@ -1,10 +1,21 @@
 .container {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     background-color: beige;
 }
+
+.hidden {
+    display: none;
+}
+
+.modal {
+    padding: 1em;
+    width: 200px;
+}
+
 
 .box {
     display: flex;
@@ -21,8 +32,34 @@
 
 .btn {
     background-color: red;
-    position: absolute;
-    z-index: 10;
-    top: -10px;
-    right: -10px;
+}
+
+p {
+    display: inline;
+}
+
+form div{
+    display: flex;
+    flex-direction: column;
+
+}
+
+#checkbox label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+#checkbox p {
+    margin: 0;
+}
+
+#checkbox div {
+    flex-direction: row;
+    gap: 12px;
+}
+
+#checkbox div div {
+    gap: 0;
 }
