@@ -150,3 +150,77 @@ submitModal.addEventListener("click", (event) => {
 
 displayBooks(myLibrary);
 
+const name = "bob";
+const age = 21;
+const color = "red";
+
+const obj = {a:1,b:2,c:3};
+const {a,b} = obj;
+const {c} = obj;
+
+const array = [1,2,3,4,5];
+const [zero, one, two] = array;
+console.log(zero, one);
+
+function createUser (name) {
+  const discordName = "@" + name;
+
+  let reputation = 0;
+  const getReputation = () => reputation;
+  const giveReputation = () => reputation++;
+
+  return { name, discordName, getReputation, giveReputation };
+}
+
+const josh = createUser("josh");
+josh.giveReputation();
+josh.giveReputation(); 
+
+console.log({
+  discordName: josh.discordName,
+  reputation: josh.getReputation()
+});
+// logs { discordName: "@josh", reputation: 2 }
+
+function createPlayer (name, level) {
+  const { getReputation, giveReputation } = createUser(name);
+
+  const increaseLevel = () => level++;
+  const getLevel = () => level;
+  return { name, getReputation, giveReputation, increaseLevel, getLevel };
+}
+
+function createNewPlayer (name, level) {
+  const user = createUser(name);
+
+  const increaseLevel = () => level++;
+  return Object.assign({}, user, { increaseLevel });
+}
+
+const sergio = createNewPlayer("sergio", 10);
+sergio.giveReputation();
+sergio.giveReputation();
+sergio.increaseLevel();
+
+console.log({
+    name: sergio.discordName,
+    reputation: sergio.getReputation(),
+});
+
+(function(){
+    console.log("hello");
+})();
+
+
+// Immediately runs and returns the object
+const calculator = (function () {
+  const add = (a, b) => a + b;
+  const sub = (a, b) => a - b;
+  const mul = (a, b) => a * b;
+  const div = (a, b) => a / b;
+
+  return { add, sub, mul, div };
+})();
+
+console.log(calculator.add(3, 5));  // 8
+console.log(calculator.mul(2, 6));  // 12
