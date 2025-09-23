@@ -23,6 +23,10 @@ function Book(title, author, pages, read){
     this.id = crypto.randomUUID();
 }
 
+function newBook(title, author, pages, read){
+    return {title,author,pages,read, id: crypto.randomUUID()};
+}
+
 Book.prototype.toggleRead = function() {
     this.read = !this.read;
 }
