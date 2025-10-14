@@ -50,6 +50,40 @@ function Person(name) {
     this.name = name;
 }
 
+let obje = {
+    name: "John",
+    surname: "Smith",
+
+    get propName() {
+        return `${this.name} ${this.surname}`;
+    },
+
+    set propName(value) {
+        [this.name, this.surname] = value.split(" ");
+    }
+};
+
+class User {
+    constructor(name) {
+        this.name = name;
+    }
+
+    get userName() {
+        return this.name;
+    }
+    
+    set userName(value) {
+        this.name = value; 
+    }
+}
+
+let user = new User("Sergio");
+user.userName = 'Cathy';
+alert(user.userName);
+
+obje.propName = "Alice Cooper";
+
+
 Person.prototype.sayName = () => console.log(`Hello, I'm ${this.name}!`);
 
 Object.setPrototypeOf(Player.prototype, Person.prototype);
