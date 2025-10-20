@@ -27,6 +27,22 @@ function newBook(title, author, pages, read){
     return {title,author,pages,read, id: crypto.randomUUID()};
 }
 
+class classNewBook {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.id = crypto.randomUUID();
+    }
+
+    sayBook() {
+        return `${this.title}, ${this.author}, ${this.pages}, ${this.read}`
+    }
+}
+
+let newBookExample = new classNewBook("george", "sergio", 122, true);
+newBookExample.sayBook();
 Book.prototype.toggleRead = function() {
     this.read = !this.read;
 }
