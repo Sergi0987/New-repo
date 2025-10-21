@@ -1,9 +1,6 @@
 function Player(name, marker) {
     this.name = name;
     this.marker = marker;
-    this.sayName = () => { 
-        console.log(this.name);
-    };
 }
 
 const player1 = new Player('steve', 'x');
@@ -41,8 +38,15 @@ class classNewBook {
     }
 }
 
+class CopyBook extends classNewBook {
+
+}
+
+let exampleBook = new CopyBook("Curious", "George", 13242, true);
+console.log(exampleBook.sayBook())
+
 let newBookExample = new classNewBook("george", "sergio", 122, true);
-newBookExample.sayBook();
+console.log(newBookExample.title);
 Book.prototype.toggleRead = function() {
     this.read = !this.read;
 }
@@ -60,11 +64,9 @@ function addBookToLibrary(title, author, pages, read) {
 
 const theHobbit = new Book('Hobbit', 'Sergio', 123, false);
 
-Player.prototype.sayHello = () => console.log("Hello, I'm player " + this.name);
+Player.prototype.sayHello = function() { console.log("Hello, I'm player " + this.name) };
 
-function Person(name) {
-    this.name = name;
-}
+player1.sayHello();
 
 let obje = {
     name: "John",
@@ -93,14 +95,22 @@ class User {
     }
 }
 
+class Person extends User {
+
+}
+
+let newPerson = new Person("Jacob");
+console.log(newPerson.userName);
+
 let user = new User("Sergio");
+console.log(user.userName);
 user.userName = 'Cathy';
-alert(user.userName);
+console.log(user.userName);
 
 obje.propName = "Alice Cooper";
 
 
-Person.prototype.sayName = () => console.log(`Hello, I'm ${this.name}!`);
+Person.prototype.sayName = function() { console.log(`Hello, I'm ${this.name}!`)};
 
 Object.setPrototypeOf(Player.prototype, Person.prototype);
 
@@ -274,3 +284,25 @@ const calculator = (function () {
 
 console.log(calculator.add(3, 5));  // 8
 console.log(calculator.mul(2, 6));  // 12
+
+
+class ClassWithPrivate {
+    #privateField;
+    #privateFieldWithInitializer = 42;
+
+    #privateMethod() {
+        this.#privateFieldWithInitializer = 53;
+    }
+}
+
+class Mathy {
+    static a = 10;
+
+    static increment(b) {
+        return this.a + b;
+    }
+}
+
+console.log(Mathy.increment(4));
+let example = new Mathy();
+console.log(example.a);
