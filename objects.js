@@ -222,6 +222,28 @@ const array = [1,2,3,4,5];
 const [zero, one, two] = array;
 console.log(zero, one);
 
+class CreateUser {
+    #reputation = 0
+
+    constructor(name) {
+        this.name = name;
+    }
+
+    get discordName() {
+        return "@" + this.name;
+    }
+
+    getReputation() {
+        return this.#reputation;
+    };
+
+    giveReputation(){
+         this.#reputation++;
+    }
+        
+
+}
+
 function createUser (name) {
   const discordName = "@" + name;
 
@@ -232,7 +254,7 @@ function createUser (name) {
   return { name, discordName, getReputation, giveReputation };
 }
 
-const josh = createUser("josh");
+const josh = new CreateUser("josh");
 josh.giveReputation();
 josh.giveReputation(); 
 
@@ -245,6 +267,12 @@ console.log({
 function createPlayer (name, level) {
   const { getReputation, giveReputation } = createUser(name);
 
+  class CreatePlayer {
+    constructor(name, level) {
+
+    }
+  }
+
   const increaseLevel = () => level++;
   const getLevel = () => level;
   return { name, getReputation, giveReputation, increaseLevel, getLevel };
@@ -255,6 +283,12 @@ function createNewPlayer (name, level) {
 
   const increaseLevel = () => level++;
   return Object.assign({}, user, { increaseLevel });
+}
+
+class CreateNewPlayer {
+    constructor(name, level) {
+        this.name = name
+    }
 }
 
 const sergio = createNewPlayer("sergio", 10);
@@ -296,13 +330,14 @@ class ClassWithPrivate {
 }
 
 class Mathy {
-    static a = 10;
+    static #a = 10;
 
     static increment(b) {
-        return this.a + b;
+        return this.#a + b;
     }
 }
 
 console.log(Mathy.increment(4));
 let example = new Mathy();
 console.log(example.a);
+
